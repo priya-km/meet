@@ -2,41 +2,20 @@ import React from "react";
 import { shallow } from "enzyme";
 import NumberOfEvents from "../NumberOfEvents";
 
-describe("<NumberOfEvents /> component", () => {
+describe("<NumberOfEvents/> component", () => {
   let NumberOfEventsWrapper;
   beforeAll(() => {
-    NumberOfEventsWrapper = shallow(<NumberOfEvents />);
+    NumberOfEventsWrapper = shallow(<NumberOfEvents updateEvents={() => {}} />);
   });
 
-  test("render number of events", () => {
-    expect(NumberOfEventsWrapper.find(".number-of-events")).toHaveLength(1);
+  test("Default input is 32", () => {
+    expect(NumberOfEventsWrapper.state("query")).toBe(32);
   });
 
-  test("render number of events input", () => {
-    expect(NumberOfEventsWrapper.find(".number-of-events-input")).toHaveLength(
-      1
-    );
-  });
-
-  test("render number of events label", () => {
-    expect(NumberOfEventsWrapper.find(".number-of-events-label")).toHaveLength(
-      1
-    );
-  });
-
-  test("render number of events input correctly", () => {
-    const numberOfEvents = NumberOfEventsWrapper.state("query");
-    expect(
-      NumberOfEventsWrapper.find(".number-of-events-input").prop("value")
-    ).toBe(numberOfEvents);
-  });
-
-  test("change state when number of events input changes", () => {
-    const eventObject = { target: { value: 10 } };
-    NumberOfEventsWrapper.find(".number-of-events-input").simulate(
-      "change",
-      eventObject
-    );
-    expect(NumberOfEventsWrapper.state("query")).toBe(10);
+  test("Value changes correctly", () => {
+    NumberOfEventsWrapper.find(".numberOfEvents").simulate("change", {
+      target: { value: 20 },
+    });
+    expect(NumberOfEventsWrapper.state("query")).toBe(20);
   });
 });

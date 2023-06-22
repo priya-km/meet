@@ -1,45 +1,38 @@
 import React, { Component } from "react";
 
 class Event extends Component {
-  state = { showDetails: false };
-  handleShowDetails = () => {
+  state = {
+    hide: true,
+  };
+
+  handleItemClicked = () => {
     this.setState((prevState) => ({
-      showDetails: !prevState.showDetails,
+      hide: !prevState.hide,
     }));
   };
 
   render() {
     const { event } = this.props;
-    const { showDetails } = this.state;
-
     return (
-      <div className="event">
-        <h1 className="summary">{event.summary}</h1>
-        <p className="event-start">
-          {new Date(event.start.dateTime).toLocaleDateString}
-        </p>
-        <p className="event-location">
-          {`@${event.summary} | ${event.location}`}
-        </p>
-
-        {showDetails && (
-          <div className="event-details">
-            <h2>About event:</h2>
-            <a className="event-link" href="{event.htmlLink}" target="_blank">
-              See More...
-            </a>
-            <p className="event-description">{event.description}</p>
-          </div>
+      <div>
+        <b className="title">Summary: {event.summary}</b>
+        {!this.hide && (
+          <ul className="details">
+            <li>Description: {event.description}</li>
+            <li>Location: {event.location}</li>
+            <li>Start: {new Date(event.start.dateTime).toISOString()}</li>
+            <li>End: {new Date(event.end.dateTime).toISOString()}</li>
+          </ul>
         )}
-
         <button
-          className="details-btn"
-          onClick={() => this.handleShowDetails()}
+          className="detailsButton"
+          onClick={() => this.handleItemClicked()}
         >
-          {!showDetails ? "show" : "hide"} details
+          Details
         </button>
       </div>
     );
   }
 }
+
 export default Event;

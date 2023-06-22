@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 
 class CitySearch extends Component {
-  state = {
-    query: "",
-    suggestions: [],
-    showSuggestions: undefined,
-  };
+  constructor() {
+    super();
+    this.state = {
+      query: "",
+      suggestions: [],
+      showSuggestions: undefined,
+    };
+  }
 
   handleInputChanged = (event) => {
     const value = event.target.value;

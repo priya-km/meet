@@ -4,35 +4,32 @@ import Event from "../Event";
 import { mockData } from "../mock-data";
 
 describe("<Event /> component", () => {
-  let EventWrapper;
+  let EventWrapper, event;
   beforeAll(() => {
-    EventWrapper = shallow(<Event event={mockData[0]} />);
+    event = mockData[0];
+    EventWrapper = shallow(<Event event={event} />);
   });
-  test("render event", () => {
-    expect(EventWrapper.find(".event")).toHaveLength(1);
+  test("render event details", () => {
+    expect(EventWrapper.find("li")).toHaveLength(4);
   });
-  test("render event name and summary", () => {
-    expect(EventWrapper.find(".summary")).toHaveLength(1);
+
+  test("event details are rendered correctly", () => {
+    const summary = EventWrapper.find(".title");
+    const details = EventWrapper.find(".details li");
+    expect(summary.text()).toBe(`Summary: ${event.summary}`);
+    expect(details.at(0).text()).toBe(`Description: ${event.description}`);
+    expect(details.at(1).text()).toBe(`Location: ${event.location}`);
+    expect(details.at(2).text()).toBe(
+      `Start: ${new Date(event.start.dateTime).toISOString()}`
+    );
+    expect(details.at(3).text()).toBe(
+      `End: ${new Date(event.end.dateTime).toISOString()}`
+    );
   });
-  test("render event location", () => {
-    expect(EventWrapper.find(".event-location")).toHaveLength(1);
-  });
-  test("render event date", () => {
-    expect(EventWrapper.find(".event-start")).toHaveLength(1);
-  });
-  test("render show details button", () => {
-    expect(EventWrapper.find(".details-btn")).toHaveLength(1);
-  });
-  test("click on show details button", () => {
-    EventWrapper.setState({ showDetails: false });
-    EventWrapper.find(".details-btn").simulate("click");
-    expect(EventWrapper.state("showDetails")).toBe(true);
-  });
-  test("render event link", () => {
-    expect(EventWrapper.find(".event-link")).toHaveLength(1);
-  });
-  test("render event details correctly", () => {
-    EventWrapper.setState({ showDetails: true });
-    expect(EventWrapper.find(".event-details")).toHaveLength(1);
+
+  test("toggle boolean", () => {
+    const display = EventWrapper.find(".detailsButton");
+    display.simulate("click");
+    expect(EventWrapper.state("hide")).toBe(false);
   });
 });
