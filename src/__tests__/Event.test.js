@@ -1,35 +1,64 @@
 import React from "react";
 import { shallow } from "enzyme";
-import Event from "../Event";
 import { mockData } from "../mock-data";
+import Event from "../Event";
 
 describe("<Event /> component", () => {
-  let EventWrapper, event;
+  let EventWrapper;
+  const event = mockData[0];
   beforeAll(() => {
-    event = mockData[0];
     EventWrapper = shallow(<Event event={event} />);
   });
-  test("render event details", () => {
-    expect(EventWrapper.find("li")).toHaveLength(4);
+
+  test("render event component", () => {
+    expect(EventWrapper).toBeDefined();
   });
 
-  test("event details are rendered correctly", () => {
-    const summary = EventWrapper.find(".title");
-    const details = EventWrapper.find(".details li");
-    expect(summary.text()).toBe(`Summary: ${event.summary}`);
-    expect(details.at(0).text()).toBe(`Description: ${event.description}`);
-    expect(details.at(1).text()).toBe(`Location: ${event.location}`);
-    expect(details.at(2).text()).toBe(
-      `Start: ${new Date(event.start.dateTime).toISOString()}`
-    );
-    expect(details.at(3).text()).toBe(
-      `End: ${new Date(event.end.dateTime).toISOString()}`
-    );
+  test("render event name and summary", () => {
+    const summary = EventWrapper.find("h2.summary");
+    expect(summary).toHaveLength(1);
+    expect(summary.text()).toBe(event.summary);
   });
 
-  test("toggle boolean", () => {
-    const display = EventWrapper.find(".detailsButton");
-    display.simulate("click");
-    expect(EventWrapper.state("hide")).toBe(false);
+  test("render event date and start time", () => {
+    const eventStart = EventWrapper.find("p.event-start");
+    expect(eventStart).toHaveLength(1);
+    expect(eventStart.text()).toBe(new Date(event.start.dateTime).toString());
+  });
+
+  test("render event name and location", () => {
+    const eventLocation = EventWrapper.find("p.event-location");
+    expect(eventLocation).toHaveLength(1);
+    expect(eventLocation.text()).toBe(`@${event.summary} | ${event.location}`);
+  });
+
+  test("collapse details by default", () => {
+    expect(EventWrapper.state("collapsed")).toBe(true);
+  });
+
+  test("collapsed details renders correctly", () => {
+    expect(EventWrapper.find("h3.about")).toHaveLength(0);
+    expect(EventWrapper.find("a.link")).toHaveLength(0);
+    expect(EventWrapper.find("p.description")).toHaveLength(0);
+  });
+
+  test("click on show details button", () => {
+    const detailsButton = EventWrapper.find("button.details-btn");
+    expect(detailsButton.text()).toBe("show details");
+    detailsButton.simulate("click");
+    expect(EventWrapper.state("collapsed")).toBe(false);
+  });
+
+  test("event details is expanded and rendered correctly", () => {
+    expect(EventWrapper.find("h3.about")).toHaveLength(1);
+    expect(EventWrapper.find("a.link")).toHaveLength(1);
+    expect(EventWrapper.find("p.description")).toHaveLength(1);
+  });
+
+  test("user hides details by clicking on button", () => {
+    const detailsButton = EventWrapper.find("button.details-btn");
+    expect(detailsButton.text()).toBe("hide details");
+    detailsButton.simulate("click");
+    expect(EventWrapper.state("collapsed")).toBe(true);
   });
 });

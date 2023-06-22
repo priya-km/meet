@@ -1,34 +1,38 @@
 import React, { Component } from "react";
 
 class Event extends Component {
-  state = {
-    hide: true,
-  };
-
-  handleItemClicked = () => {
+  state = { collapsed: true };
+  toggleDetails = () => {
     this.setState((prevState) => ({
-      hide: !prevState.hide,
+      collapsed: !prevState.collapsed,
     }));
   };
 
   render() {
     const { event } = this.props;
+    const { collapsed } = this.state;
     return (
-      <div>
-        <b className="title">Summary: {event.summary}</b>
-        {!this.hide && (
-          <ul className="details">
-            <li>Description: {event.description}</li>
-            <li>Location: {event.location}</li>
-            <li>Start: {new Date(event.start.dateTime).toISOString()}</li>
-            <li>End: {new Date(event.end.dateTime).toISOString()}</li>
-          </ul>
+      <div className="event">
+        <h2 className="summary">{event.summary}</h2>
+        <p className="event-start">
+          {new Date(event.start.dateTime).toString()}
+        </p>
+        <p className="event-location">
+          {`@${event.summary} | ${event.location}`}
+        </p>
+        {!collapsed && (
+          <>
+            <div className="details">
+              <h3 className="about">About event:</h3>
+              <a className="link" href={event.htmlLink}>
+                See details
+              </a>
+              <p className="description">{event.description}</p>
+            </div>
+          </>
         )}
-        <button
-          className="detailsButton"
-          onClick={() => this.handleItemClicked()}
-        >
-          Details
+        <button className="details-btn" onClick={() => this.toggleDetails()}>
+          {collapsed ? "show" : "hide"} details
         </button>
       </div>
     );
