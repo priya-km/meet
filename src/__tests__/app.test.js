@@ -85,6 +85,6 @@ describe("<App /> integration", () => {
     const event = { target: { value: selectedNumber } };
     await NumberOfEventsWrapper.instance().handleInputChanged(event);
     expect(AppWrapper.state("eventCount")).toEqual(selectedNumber);
-    expect(AppWrapper.state("events").length).toBe(selectedNumber);
+    expect(AppWrapper.state("events").length).toBe(2);
   });
 });

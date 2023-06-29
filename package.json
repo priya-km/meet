@@ -55,14 +55,16 @@
   "devDependencies": {
     "@wojtekmaj/enzyme-adapter-react-17": "^0.8.0",
     "enzyme": "^3.11.0",
-    "gh-pages": "^5.0.0"
+    "gh-pages": "^5.0.0",
+    "jest-cucumber": "^3.0.1",
+    "puppeteer": "^18.1.0"
   },
-    "jest": {
+  "jest": {
     "moduleNameMapper": {
       "axios": "axios/dist/node/axios.cjs",
-       "transformIgnorePatterns": [
-    "node_modules/(?!(react-leaflet|@react-leaflet|d3-*|axios))"
-  ]
+      "transformIgnorePatterns": [
+        "node_modules/(?!(react-leaflet|@react-leaflet|d3-*|axios))"
+      ]
     }
   }
 }
