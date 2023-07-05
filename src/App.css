@@ -130,7 +130,9 @@ input[type="number"] {
 
 .Alert {
   position: fixed;
-  top: 20px;
+  top: 50px;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .data-vis-wrapper {
@@ -198,6 +200,12 @@ input[type="number"] {
   font-family: "Roboto";
 }
 
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+
 
 
 @media only screen and (min-width: 992px) {
@@ -211,3 +219,5 @@ input[type="number"] {
     margin: 0 auto;
   }
 }
+
+

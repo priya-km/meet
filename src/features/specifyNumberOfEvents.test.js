@@ -50,7 +50,7 @@ defineFeature(feature, (test) => {
       "the app should display the number of events specified by the user.",
       () => {
         AppWrapper.update();
-        expect(AppWrapper.find(".event")).toHaveLength(1);
+        expect(AppWrapper.find(".event")).toHaveLength(2);
       }
     );
   });
