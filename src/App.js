@@ -5,6 +5,7 @@ import EventList from "./EventList";
 import NumberOfEvents from "./NumberOfEvents";
 import { getEvents, extractLocations } from "./api";
 import "./nprogress.css";
+import { WarningAlert } from "./Alert";
 
 class App extends Component {
   state = {
@@ -12,6 +13,7 @@ class App extends Component {
     locations: [],
     eventCount: 32,
     selectedCity: null,
+    warningText: "",
   };
 
   componentDidMount() {
@@ -30,6 +32,14 @@ class App extends Component {
   componentWillUnmount() {
     this.mounted = false;
   }
+
+  promptOfflineWarning = () => {
+    if (!navigator.onLine) {
+      this.setState({
+        warningText: "You are offline, so events may not be up to date.",
+      });
+    }
+  };
 
   updateEvents = (location, eventCount) => {
     if (!eventCount) {
@@ -84,6 +94,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <h1 className="mb-4">Meet App</h1>
+        <div
+          className="position-absolute start-50 translate-middle-x"
+          style={{ top: "10px" }}
+        >
+          <WarningAlert text={this.state.offlineText} />
+        </div>
         <h5>Search for a city...</h5>
         <CitySearch
           locations={this.state.locations}
