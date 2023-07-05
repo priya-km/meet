@@ -94,14 +94,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1 className="mb-4">Meet App</h1>
-        <div
-          className="position-absolute start-50 translate-middle-x"
-          style={{ top: "10px" }}
-        >
-          <WarningAlert text={this.state.offlineText} />
-        </div>
-        <h5>Search for a city...</h5>
+        <WarningAlert text={this.state.warningText} />
+        <h1 className>Meet App</h1>
+        <h5>Search for a city</h5>
         <CitySearch
           locations={this.state.locations}
           updateEvents={this.updateEvents}
