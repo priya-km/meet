@@ -18,6 +18,12 @@ class App extends Component {
 
   componentDidMount() {
     this.mounted = true;
+    this.promptOfflineWarning(); // Check offline status when the component mounts
+
+    // Add an event listener to check online/offline status
+    window.addEventListener("online", this.promptOfflineWarning);
+    window.addEventListener("offline", this.promptOfflineWarning);
+
     getEvents().then((events) => {
       if (this.mounted) {
         const shownEvents = events.slice(0, this.state.eventCount);
@@ -31,12 +37,19 @@ class App extends Component {
 
   componentWillUnmount() {
     this.mounted = false;
+    // Remove the event listeners when the component unmounts
+    window.removeEventListener("online", this.promptOfflineWarning);
+    window.removeEventListener("offline", this.promptOfflineWarning);
   }
 
   promptOfflineWarning = () => {
     if (!navigator.onLine) {
       this.setState({
         warningText: "You are offline, so events may not be up to date.",
+      });
+    } else {
+      this.setState({
+        warningText: "", // Clear the warning text if online
       });
     }
   };
@@ -92,9 +105,13 @@ class App extends Component {
   };
 
   render() {
+    const { warningText } = this.state;
+
     return (
       <div className="App">
-        <WarningAlert text={this.state.warningText} />
+        {warningText && warningText.length > 0 && (
+          <WarningAlert text={warningText} />
+        )}
         <h1 className>Meet App</h1>
         <h5>Search for a city</h5>
         <CitySearch

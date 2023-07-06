@@ -44,7 +44,7 @@ class WarningAlert extends Alert {
   constructor(props) {
     super(props);
     this.color = "orange";
-    this.bgColor = "rgb(255, 87, 51)"; // light orange
+    this.bgColor = "rgb(255,231, 196)"; // light orange
   }
 }
 
