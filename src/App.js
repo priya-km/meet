@@ -119,7 +119,7 @@ class App extends Component {
       const number = events.filter(
         (event) => event.location === location
       ).length;
-      const city = location.split(", ").shift();
+      const city = location.split(/, | - /)[0];
       return { city, number };
     });
     return data;
