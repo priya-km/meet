@@ -4,9 +4,11 @@ import CitySearch from "./CitySearch";
 import EventList from "./EventList";
 import NumberOfEvents from "./NumberOfEvents";
 import EventGenre from "./EventGenre";
-import { getEvents, extractLocations } from "./api";
+import { getEvents, extractLocations, getAccessToken, checkToken } from "./api";
 import "./nprogress.css";
 import { WarningAlert } from "./Alert";
+import WelcomeScreen from "./WelcomeScreen";
+import logo from "./meet-300.png";
 import {
   ScatterChart,
   Scatter,
@@ -24,25 +26,38 @@ class App extends Component {
     eventCount: 32,
     selectedCity: null,
     warningText: "",
+    showWelcomeScreen: undefined,
   };
 
   componentDidMount() {
     this.mounted = true;
     this.promptOfflineWarning(); // Check offline status when the component mounts
 
-    // Add an event listener to check online/offline status
     window.addEventListener("online", this.promptOfflineWarning);
     window.addEventListener("offline", this.promptOfflineWarning);
 
-    getEvents().then((events) => {
-      if (this.mounted) {
-        const shownEvents = events.slice(0, this.state.eventCount);
-        this.setState({
-          events: shownEvents,
-          locations: extractLocations(events),
-        });
-      }
-    });
+    const accessToken = localStorage.getItem("access_token");
+    const searchParams = new URLSearchParams(window.location.search);
+    const code = searchParams.get("code");
+    const isLocal = window.location.href.indexOf("localhost") > -1;
+    this.setState({ showWelcomeScreen: !code && !accessToken && isLocal });
+
+    if ((code || accessToken || isLocal) && this.mounted) {
+      checkToken(accessToken).then((response) => {
+        const isTokenValid = response.error ? false : true;
+        if (isTokenValid) {
+          getEvents().then((events) => {
+            if (this.mounted) {
+              const shownEvents = events.slice(0, this.state.eventCount);
+              this.setState({
+                events: shownEvents,
+                locations: extractLocations(events),
+              });
+            }
+          });
+        }
+      });
+    }
   }
 
   componentWillUnmount() {
@@ -126,6 +141,8 @@ class App extends Component {
   };
 
   render() {
+    if (this.state.showWelcomeScreen === undefined)
+      return <div className="App" />;
     const { warningText } = this.state;
 
     return (
@@ -133,8 +150,8 @@ class App extends Component {
         {warningText && warningText.length > 0 && (
           <WarningAlert text={warningText} />
         )}
-        <h1 className>Meet App</h1>
-        <h5>Search for a city</h5>
+        <img src={logo} alt="meet-app-logo" width="300" />
+        <h5>Search for a city..</h5>
         <CitySearch
           locations={this.state.locations}
           updateEvents={this.updateEvents}
@@ -170,6 +187,12 @@ class App extends Component {
           </ResponsiveContainer>
         </div>
         <EventList events={this.state.events} />
+        <WelcomeScreen
+          showWelcomeScreen={this.state.showWelcomeScreen}
+          getAccessToken={() => {
+            getAccessToken();
+          }}
+        />
       </div>
     );
   }
