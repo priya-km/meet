@@ -141,8 +141,22 @@ class App extends Component {
   };
 
   render() {
-    if (this.state.showWelcomeScreen === undefined)
-      return <div className="App" />;
+    const { showWelcomeScreen } = this.state;
+    const accessToken = localStorage.getItem("access_token");
+    const isTokenValid = checkToken(accessToken).then(
+      (response) => !response.error
+    );
+
+    if (showWelcomeScreen && !isTokenValid) {
+      return (
+        <div className="App">
+          <WelcomeScreen
+            showWelcomeScreen={showWelcomeScreen}
+            getAccessToken={getAccessToken}
+          />
+        </div>
+      );
+    }
     const { warningText } = this.state;
 
     return (
@@ -151,7 +165,7 @@ class App extends Component {
           <WarningAlert text={warningText} />
         )}
         <img src={logo} alt="meet-app-logo" width="300" />
-        <h5>Search for a city..</h5>
+        <h5>Search for a city</h5>
         <CitySearch
           locations={this.state.locations}
           updateEvents={this.updateEvents}
