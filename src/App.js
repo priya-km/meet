@@ -29,7 +29,7 @@ class App extends Component {
     showWelcomeScreen: undefined,
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     this.mounted = true;
     this.promptOfflineWarning(); // Check offline status when the component mounts
 
@@ -37,23 +37,16 @@ class App extends Component {
     window.addEventListener("offline", this.promptOfflineWarning);
 
     const accessToken = localStorage.getItem("access_token");
+    const isTokenValid = (await checkToken(accessToken)).error ? false : true;
     const searchParams = new URLSearchParams(window.location.search);
-    const code = searchParams.get("code");
-    const isLocal = window.location.href.indexOf("localhost") > -1;
-    this.setState({ showWelcomeScreen: !code && !accessToken && isLocal });
-
-    if ((code || accessToken || isLocal) && this.mounted) {
-      checkToken(accessToken).then((response) => {
-        const isTokenValid = response.error ? false : true;
-        if (isTokenValid) {
-          getEvents().then((events) => {
-            if (this.mounted) {
-              const shownEvents = events.slice(0, this.state.eventCount);
-              this.setState({
-                events: shownEvents,
-                locations: extractLocations(events),
-              });
-            }
+    const code = await searchParams.get("code");
+    this.setState({ showWelcomeScreen: !(code || isTokenValid) });
+    if ((code || isTokenValid) && this.mounted) {
+      getEvents().then((events) => {
+        if (this.mounted) {
+          this.setState({
+            events: events,
+            locations: extractLocations(events),
           });
         }
       });
@@ -141,22 +134,8 @@ class App extends Component {
   };
 
   render() {
-    const { showWelcomeScreen } = this.state;
-    const accessToken = localStorage.getItem("access_token");
-    const isTokenValid = checkToken(accessToken).then(
-      (response) => !response.error
-    );
-
-    if (showWelcomeScreen && !isTokenValid) {
-      return (
-        <div className="App">
-          <WelcomeScreen
-            showWelcomeScreen={showWelcomeScreen}
-            getAccessToken={getAccessToken}
-          />
-        </div>
-      );
-    }
+    if (this.state.showWelcomeScreen === undefined)
+      return <div className="App" />;
     const { warningText } = this.state;
 
     return (
