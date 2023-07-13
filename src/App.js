@@ -139,53 +139,63 @@ class App extends Component {
     const { warningText } = this.state;
 
     return (
-      <div className="App">
-        {warningText && warningText.length > 0 && (
-          <WarningAlert text={warningText} />
-        )}
-        <img src={logo} alt="meet-app-logo" width="300" />
-        <h5>Search for a city</h5>
-        <CitySearch
-          locations={this.state.locations}
-          updateEvents={this.updateEvents}
-        />
-        <h5>Number of Events</h5>
-        <NumberOfEvents
-          selectedCity={this.state.selectedCity}
-          query={this.state.eventCount}
-          updateEvents={this.updateEvents}
-        />
-        <div className="data-vis-wrapper">
-          <EventGenre events={this.state.events} />
-          <ResponsiveContainer width="100%" height={500}>
-            <ScatterChart margin={{ top: 20, right: 20, bottom: 50, left: 0 }}>
-              <CartesianGrid />
-              <XAxis
-                type="category"
-                dataKey="city"
-                name="city"
-                angle="35"
-                minTickGap="2"
-                tick={{ textAnchor: "start" }}
-              />
-              <YAxis
-                allowDecimals={false}
-                type="number"
-                dataKey="number"
-                name="number of events"
-              />
-              <Tooltip cursor={{ strokeDasharray: "3 3" }} />
-              <Scatter data={this.getData()} fill="#8884d8" />
-            </ScatterChart>
-          </ResponsiveContainer>
+      <div>
+        <nav className="navbar">
+          <div className="navbar-logo">
+            <img src={logo} alt="meet-app-logo" width="100" height="100" />
+          </div>
+          <div className="navbar-search">
+            <h5>Search for a city</h5>
+            <CitySearch
+              locations={this.state.locations}
+              updateEvents={this.updateEvents}
+            />
+          </div>
+        </nav>
+        <div className="content">
+          {warningText && warningText.length > 0 && (
+            <WarningAlert text={warningText} />
+          )}
+          <h5 className="noe">Number of Events</h5>
+          <NumberOfEvents
+            selectedCity={this.state.selectedCity}
+            query={this.state.eventCount}
+            updateEvents={this.updateEvents}
+          />
+          <div className="data-vis-wrapper">
+            <EventGenre events={this.state.events} />
+            <ResponsiveContainer width="100%" height={500}>
+              <ScatterChart
+                margin={{ top: 20, right: 20, bottom: 50, left: 0 }}
+              >
+                <CartesianGrid />
+                <XAxis
+                  type="category"
+                  dataKey="city"
+                  name="city"
+                  angle="35"
+                  minTickGap="2"
+                  tick={{ textAnchor: "start" }}
+                />
+                <YAxis
+                  allowDecimals={false}
+                  type="number"
+                  dataKey="number"
+                  name="number of events"
+                />
+                <Tooltip cursor={{ strokeDasharray: "3 3" }} />
+                <Scatter data={this.getData()} fill="#8884d8" />
+              </ScatterChart>
+            </ResponsiveContainer>
+          </div>
+          <EventList events={this.state.events} />
+          <WelcomeScreen
+            showWelcomeScreen={this.state.showWelcomeScreen}
+            getAccessToken={() => {
+              getAccessToken();
+            }}
+          />
         </div>
-        <EventList events={this.state.events} />
-        <WelcomeScreen
-          showWelcomeScreen={this.state.showWelcomeScreen}
-          getAccessToken={() => {
-            getAccessToken();
-          }}
-        />
       </div>
     );
   }

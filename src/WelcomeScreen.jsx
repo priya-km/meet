@@ -7,12 +7,12 @@ function WelcomeScreen(props) {
     return props.showWelcomeScreen ?
         (
             <div className="WelcomeScreen">
-             <img src={logo} alt="meet-app-logo" width="300" />
-
-            <h1>Welcome</h1>
-            <h4>
-            For web developers around the world <br></br>Log in to view events near you
-</h4>
+             <img src={logo} alt="meet-app-logo" width="300" class="logo" />
+            <div class="welcome-text">
+                    <h1>Welcome</h1>
+                    </div>
+<h4>For web developers around the world <br></br>Log in to view events near you
+</h4> <br></br>
 <div className="button_cont" align="center">
 <div class="google-btn">
 <div class="google-icon-wrapper">
