@@ -193,7 +193,9 @@ class App extends Component {
             </ResponsiveContainer>
           </div>
           <div className="event-list">
-            <EventList events={this.state.events} />
+            <div className="ev-center">
+              <EventList events={this.state.events} />
+            </div>
           </div>
           <WelcomeScreen
             showWelcomeScreen={this.state.showWelcomeScreen}
