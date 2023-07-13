@@ -31,7 +31,8 @@ class="btn-text"
 </button>
 </div>
 </div>
-<a href="https://priya-km.github.io/meet/privacy.html">Privacy policy</a>
+<a href="https://priya-km.github.io/meet/privacy-policy.html
+">Privacy policy</a>
 </div>
 )
 : null
