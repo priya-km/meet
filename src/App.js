@@ -145,7 +145,9 @@ class App extends Component {
             <img src={logo} alt="meet-app-logo" width="100" height="100" />
           </div>
           <div className="navbar-search">
-            <h5>Search for a city</h5>
+            <div className="search">
+              <h5>Search for a city</h5>
+            </div>
             <CitySearch
               locations={this.state.locations}
               updateEvents={this.updateEvents}
@@ -156,7 +158,9 @@ class App extends Component {
           {warningText && warningText.length > 0 && (
             <WarningAlert text={warningText} />
           )}
-          <h5 className="noe">Number of Events</h5>
+          <div className="noe">
+            <h5>Number of Events</h5>
+          </div>
           <NumberOfEvents
             selectedCity={this.state.selectedCity}
             query={this.state.eventCount}
@@ -188,7 +192,9 @@ class App extends Component {
               </ScatterChart>
             </ResponsiveContainer>
           </div>
-          <EventList events={this.state.events} />
+          <div className="event-list">
+            <EventList events={this.state.events} />
+          </div>
           <WelcomeScreen
             showWelcomeScreen={this.state.showWelcomeScreen}
             getAccessToken={() => {

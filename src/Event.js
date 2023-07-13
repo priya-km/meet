@@ -26,14 +26,17 @@ class Event extends Component {
             <div className="details">
               <h3 className="about">About event:</h3>
               <a className="link" href={event.htmlLink}>
-                See details
+                View on Google Calendar
               </a>
               <p className="description">{event.description}</p>
             </div>
           </>
         )}
-        <button className="details-btn" onClick={() => this.toggleDetails()}>
-          {collapsed ? "show" : "hide"} details
+        <button
+          className="details-btn link"
+          onClick={() => this.toggleDetails()}
+        >
+          {collapsed ? "Show" : "Hide"} Details
         </button>
       </div>
     );

@@ -8,6 +8,7 @@
   background-color: white;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   border-bottom: #494949;
+  padding-bottom: 0%;
 }
 
 .navbar-logo {
@@ -19,7 +20,15 @@
 .navbar-search {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   margin-right: 10px;
+  position: relative;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.search {
+  padding-right: 10px;
 }
 
 .content {
@@ -66,7 +75,7 @@ input[type="number"] {
   border: 1px solid #ccc;
   font-size: 14px;
   line-height: 20px;
-  align-self: center;
+  align-self: right;
   height: 38px;
 }
 
@@ -78,12 +87,11 @@ input[type="number"] {
   display: flex;
   flex-direction: column;
   flex-basis: 300px;
-  max-width: 300px;
+  max-width: 500px;
   margin: auto;
   position: relative;
   text-overflow: ellipsis;
   white-space: nowrap;
-  overflow: hidden;
 }
 
 
@@ -118,7 +126,7 @@ input[type="number"] {
 .event {
   padding: 10px 10px 35px;
   margin-bottom: 10px;
-  text-align: left;
+  text-align: center;
   border: 1px solid #ccc;
   border-radius: 4px;
   position: relative;
@@ -248,8 +256,12 @@ input[type="number"] {
   text-align: center;
 }
 
-
-
+.event-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+  justify-items: center;
+}
 
 @media only screen and (min-width: 992px) {
   .data-vis-wrapper {
