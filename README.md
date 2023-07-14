@@ -2,7 +2,8 @@
 ![meet-300](https://github.com/priya-km/meet/assets/118628757/bccb21dd-1d4c-450c-9549-d4e7d7fc6f77 "Meet Logo")
 
 **[Click here for the LIVE VIEW of Meet](https://priya-km.github.io/meet/ "meet live view link")**
-**Note:** The app is currently pending Google verification so you may get a warning message upon login, if you wish to proceed you can click the "Advanced" text on the bottom left.
+**Note:**
+The app is currently pending Google verification so you may get a warning message upon login, if you wish to proceed you can click the "Advanced" text on the bottom left.
 
 <h3>What is Meet?</h3>
 Meet is built to be a place where web developers from all around the world connect to one another through events in different cities near them. They can use the Meet App to search for events within their city.
