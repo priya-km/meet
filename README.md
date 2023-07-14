@@ -1,7 +1,7 @@
 # meet-app
 ![meet-300](https://github.com/priya-km/meet/assets/118628757/bccb21dd-1d4c-450c-9549-d4e7d7fc6f77 "Meet Logo")
 
-**[Click here for the LIVE VIEW of Meet]([https://priya-km.github.io/meet/] "meet live view link")**
+**[Click here for the LIVE VIEW of Meet](https://priya-km.github.io/meet/ "meet live view link")**
 
 <h3>What is Meet?</h3>
 Meet is built to be a place where web developers from all around the world connect to one another through events in different cities near them. They can use the Meet App to search for events within their city.
