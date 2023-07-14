@@ -1,5 +1,6 @@
 # meet-app
 ![meet-300](https://github.com/priya-km/meet/assets/118628757/bccb21dd-1d4c-450c-9549-d4e7d7fc6f77 "Meet Logo")
+**[Click here for the LIVE VIEW of Meet]([https://myflixpkm.netlify.app/](https://priya-km.github.io/meet/) "meet live view link")**
 
 <h3>What is Meet?</h3>
 Meet is built to be a place where web developers from all around the world connect to one another through events in different cities near them. They can use the Meet App to search for events within their city.
@@ -118,7 +119,40 @@ As a user, I should be able to see  a chart with the number of upcoming events i
 
 ![charts](https://github.com/priya-km/meet/assets/118628757/4443fb39-3989-4da5-9228-bf81e438a4b0 "Event charts")
 
-
 **Scenario 1:** Show a chart with the number of upcoming events in each city <br>
 **Given** the user has not selected a city **When** the user wants to compare events between cities **Then** they should be able to access a chart with the number of upcoming events in each city
+
+<h1>Languages, Libraries, Frameworks, etc.</h1>
+● Javascript <br>
+● CSS <br>
+● HTML <br>
+● React <br>
+● Gherkin <br>
+  
+<h1>Technical Requirements</h1>
+● Is a React application.
+● Built using the TDD technique.
+● Uses the Google Calendar API and OAuth2 authentication flow.
+● Use serverless functions (AWS lambda) for the authorization server
+instead of using a traditional server.
+● Works on the latest versions of Chrome, Firefox, Safari, Edge, and Opera, as well
+as on IE11.
+● Passes Lighthouse’s PWA checklist.
+● Works offline or in slow network conditions with the help of a service worker.
+● Users can install the app on desktop and add the app to their home screen on
+mobile.
+● Implements an alert system using an OOP approach to show information to the
+user.
+● Makes use of data visualization.
+● Covered by tests with a coverage rate >= 90%.
+
+
+<h2>Author</h2>
+<h3>Priya K Maharban</h3>
+
+● [GitHub Profile](https://github.com/priya-km "Priya-Maharban GitHub profile link")
+<br>
+● [Email](mailto:priyakmaharban@gmail.com?subject=Hi% "Hi!")
+<br>
+● [Portfolio Website](https://priya-km.github.io/portfolio "Priya Maharban Portfolio website")
 
