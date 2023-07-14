@@ -176,7 +176,7 @@ class App extends Component {
                 <XAxis
                   type="category"
                   dataKey="city"
-                  name="city"
+                  name="City"
                   angle="35"
                   minTickGap="2"
                   tick={{ textAnchor: "start" }}
@@ -185,7 +185,7 @@ class App extends Component {
                   allowDecimals={false}
                   type="number"
                   dataKey="number"
-                  name="number of events"
+                  name="Number of Events"
                 />
                 <Tooltip cursor={{ strokeDasharray: "3 3" }} />
                 <Scatter data={this.getData()} fill="#8884d8" />

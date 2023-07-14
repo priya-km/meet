@@ -7,11 +7,16 @@
   display: inline-block;
   transition: all 0.3s ease;
   border: none;
+  margin-bottom: 10px;
 }
 
 .link:hover {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   transform: translateY(-1px);
+}
+
+.details-btn {
+    margin-right: 5px;;
 }
 
 .link:active {
