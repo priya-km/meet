@@ -134,20 +134,20 @@ As a user, I should be able to see  a chart with the number of upcoming events i
 ● Gherkin <br>
   
 <h1>Technical Requirements</h1>
-● Is a React application.
-● Built using the TDD technique.
-● Uses the Google Calendar API and OAuth2 authentication flow.
+● Is a React application.<br>
+● Built using the TDD technique.<br>
+● Uses the Google Calendar API and OAuth2 authentication flow.<br>
 ● Use serverless functions (AWS lambda) for the authorization server
-instead of using a traditional server.
+instead of using a traditional server.<br>
 ● Works on the latest versions of Chrome, Firefox, Safari, Edge, and Opera, as well
-as on IE11.
-● Passes Lighthouse’s PWA checklist.
-● Works offline or in slow network conditions with the help of a service worker.
+as on IE11.<br>
+● Passes Lighthouse’s PWA checklist.<br>
+● Works offline or in slow network conditions with the help of a service worker.<br>
 ● Users can install the app on desktop and add the app to their home screen on
-mobile.
+mobile.<br>
 ● Implements an alert system using an OOP approach to show information to the
-user.
-● Makes use of data visualization.
+user.<br>
+● Makes use of data visualization.<br>
 ● Covered by tests with a coverage rate >= 90%.
 
 
