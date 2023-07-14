@@ -103,6 +103,9 @@ As a user, I should be able to use the app when it’s offline so that I can sti
 **Scenario 1:** Show cached data when there’s no internet connection <br>
 **Given** a user has no internet connection **When** the user still wants to use the app **Then** the cached data will be available.
 
+![offline](https://github.com/priya-km/meet/assets/118628757/8e3ecb30-d68f-4e9a-bcfd-2fe1673d1be2 "Offline warning message")
+
+
 **Scenario 2:** Show error when user changes the settings (city, time range) <br>
 **Given** a user changes their settings **When** the user exits settings or opens the app again **Then** they will see an error message notifying them that their settings have been changed.
 
@@ -112,6 +115,9 @@ As a user, I should be able to use the app when it’s offline so that I can sti
 As a user, I should be able to see  a chart with the number of upcoming events in each city so that I can see all of the different options.
 
 <h3>Scenarios</h3>
+
+![charts](https://github.com/priya-km/meet/assets/118628757/4443fb39-3989-4da5-9228-bf81e438a4b0 "Event charts")
+
 
 **Scenario 1:** Show a chart with the number of upcoming events in each city <br>
 **Given** the user has not selected a city **When** the user wants to compare events between cities **Then** they should be able to access a chart with the number of upcoming events in each city
