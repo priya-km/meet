@@ -127,8 +127,8 @@ class App extends Component {
       const number = events.filter(
         (event) => event.location === location
       ).length;
-      const city = location.split(/, | - /)[0];
-      return { city, number };
+      const name = location.split(/, | - /)[0];
+      return { name, number };
     });
     return data;
   };
@@ -142,7 +142,9 @@ class App extends Component {
       <div>
         <nav className="navbar">
           <div className="navbar-logo">
-            <img src={logo} alt="meet-app-logo" width="100" height="100" />
+            <a href="https://priya-km.github.io/meet/">
+              <img src={logo} alt="meet-app-logo" width="100" height="100" />
+            </a>
           </div>
           <div className="navbar-search">
             <div className="search">
@@ -175,7 +177,7 @@ class App extends Component {
                 <CartesianGrid />
                 <XAxis
                   type="category"
-                  dataKey="city"
+                  dataKey="name"
                   name="City"
                   angle="35"
                   minTickGap="2"

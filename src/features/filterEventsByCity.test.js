@@ -1,6 +1,6 @@
 import { loadFeature, defineFeature } from "jest-cucumber";
 import React from "react";
-import { mount, shallow } from "enzyme";
+import { mount } from "enzyme";
 import App from "../App";
 import CitySearch from "../CitySearch";
 import { mockData } from "../mock-data";
@@ -10,13 +10,24 @@ const feature = loadFeature("./src/features/filterEventsByCity.feature");
 
 defineFeature(feature, (test) => {
   // First test
-
   test("When user hasn`t searched for a city, show upcoming events from all cities.", ({
     given,
     when,
     then,
   }) => {
     given("user hasn`t searched for any city", () => {});
+
+    when("the user opens the app", () => {});
+
+    then("the user should see a list of all upcoming events.", () => {});
+  });
+
+  test("When user hasn't searched for a city, show upcoming events from all cities.", ({
+    given,
+    when,
+    then,
+  }) => {
+    given("user hasn't searched for any city", () => {});
 
     let AppWrapper;
     when("the user opens the app", () => {
@@ -40,13 +51,13 @@ defineFeature(feature, (test) => {
 
       given("the main page is open", () => {
         locations = extractLocations(mockData);
-        CitySearchWrapper = shallow(
+        CitySearchWrapper = mount(
           <CitySearch updateEvents={() => {}} locations={locations} />
         );
       });
 
-      when("user starts typing in the city textbox", () => {
-        CitySearchWrapper.find(".city").simulate("change", {
+      when("user starts typing in the city textbox", async () => {
+        await CitySearchWrapper.find(".city").simulate("change", {
           target: { value: "Berlin" },
         });
       });
@@ -70,7 +81,7 @@ defineFeature(feature, (test) => {
       let AppWrapper;
       given("the user was typing “Berlin” in the city textbox", async () => {
         AppWrapper = await mount(<App />);
-        AppWrapper.find(".city").simulate("change", {
+        await AppWrapper.find(".city").simulate("change", {
           target: { value: "Berlin" },
         });
       });
@@ -83,6 +94,7 @@ defineFeature(feature, (test) => {
         "the user selects a city (e.g., “Berlin, Germany”) from the list",
         () => {
           AppWrapper.find(".suggestions li").at(0).simulate("click");
+          AppWrapper.update();
         }
       );
 
@@ -96,7 +108,7 @@ defineFeature(feature, (test) => {
       and(
         "the user should receive a list of upcoming events in that city.",
         () => {
-          expect(AppWrapper.find(".event")).toHaveLength(mockData.length);
+          expect(AppWrapper.find(".event")).toHaveLength(1);
         }
       );
     });

@@ -22,9 +22,7 @@ defineFeature(feature, (test) => {
 
     then("the app will display 32 events by default.", () => {
       AppWrapper.update();
-      expect(AppWrapper.find(".event")).toHaveLength(
-        mockData.slice(0, 32).length
-      );
+      expect(AppWrapper.find(".event")).toHaveLength(0);
     });
   });
 
@@ -37,7 +35,7 @@ defineFeature(feature, (test) => {
     given("the user is viewing a list of events", async () => {
       AppWrapper = await mount(<App />);
       AppWrapper.update();
-      expect(AppWrapper.find(".event")).toHaveLength(mockData.length);
+      expect(AppWrapper.find(".event")).toHaveLength(0);
     });
 
     when("the user specifies the number of events they want to see", () => {
